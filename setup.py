@@ -34,8 +34,8 @@ from setuptools import setup, Command,Extension
 import shutil
 sys.path.append(os.path.curdir)
 import site
-from src.prep.src.prep import __version__ as version
-
+#from src.prep.src.prep import __version__ as version
+version = "1.3.1"
 #os.environ["CC"] = "gcc"
 #os.environ["CXX"] = "g++"
 

@@ -3184,7 +3184,7 @@ def scfs(aflowkeys,allAFLOWpiVars, refFile,pseudodir=None,build_type='product',c
                 if len(re.findall(PARAM_LABELS[entry],inputfile))==0:
                         print(('INVALID REF INPUT FILE: KEYWORD %s NOT FOUND. EXITING.' % PARAM_LABELS[entry]))
                         raise SystemExit
-                if type(PARAM_VARS[entry][0]) != type(''):
+                if type(PARAM_VARS[entry][0]) != '':
 
                         try:
                                 PARAM_VARS[entry]=tuple([str(subEntry) for subEntry in PARAM_VARS[entry]])
@@ -3317,8 +3317,10 @@ def scfs(aflowkeys,allAFLOWpiVars, refFile,pseudodir=None,build_type='product',c
                     inputfile = AFLOWpi.prep._cleanInputStringSCF(inputfile,convert=convert)
                 except Exception as e:
                     AFLOWpi.run._fancy_error_log(e)
-
-                calc_label = AFLOWpi.prep._hash64String(inputfile)
+                if aflowkeys['ID'] != '':
+                    calc_label=aflowkeys['ID']
+                else:
+                    calc_label = AFLOWpi.prep._hash64String(inputfile)
 
                 kp = '_AFLOWPI_PREFIX_'
                 calc_label+='_01'
@@ -4260,7 +4262,7 @@ def _getLoglevel():
 
 
 
-def init__(PROJECT, SET='', AUTHOR='', CORRESPONDING='', SPONSOR='',config='',workdir=None,make_symlink=False):
+def init__(PROJECT, SET='', AUTHOR='', CORRESPONDING='', ID='', SPONSOR='',config='',workdir=None,make_symlink=False):
 
         """
         Initializes the frame
@@ -4269,7 +4271,8 @@ def init__(PROJECT, SET='', AUTHOR='', CORRESPONDING='', SPONSOR='',config='',wo
          PROJECT (str): Name of project
          SET (str): Name of set 
          author (str): Name of author
-         CORRESPONDING (str): Name of corresponding 
+         CORRESPONDING (str): Name of corresponding
+         ID (str): Fixed id to calculation
          SPONSOR (str): Name of sponsor
          
         e.g. initFrame('LNTYPE','', 'MF', 'marco.fornari@cmich.edu','DOD-MURI'). Return the AFLOKEYS dictionary.
@@ -4389,7 +4392,7 @@ EXEC DIR : %s\n'''%(config,PROJECT,set_str,'./')
 
 
         __aflowkeys__ = {}
-        __aflowkeys__.update({'project':PROJECT, 'set':SET, 'author':AUTHOR, 'corresponding':CORRESPONDING, 'sponsor':SPONSOR})
+        __aflowkeys__.update({'project':PROJECT, 'set':SET, 'author':AUTHOR, 'ID':ID, 'corresponding':CORRESPONDING, 'sponsor':SPONSOR})
         __aflowkeys__.update({'date':date})
 
         dest = os.path.join(AFLOWpidir,'CONFIG.config')        
