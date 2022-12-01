@@ -3184,8 +3184,7 @@ def scfs(aflowkeys,allAFLOWpiVars, refFile,pseudodir=None,build_type='product',c
                 if len(re.findall(PARAM_LABELS[entry],inputfile))==0:
                         print(('INVALID REF INPUT FILE: KEYWORD %s NOT FOUND. EXITING.' % PARAM_LABELS[entry]))
                         raise SystemExit
-                if type(PARAM_VARS[entry][0]) != '':
-
+                if PARAM_VARS[entry][0] != '':
                         try:
                                 PARAM_VARS[entry]=tuple([str(subEntry) for subEntry in PARAM_VARS[entry]])
                         #if the input can't be converted into a string something in the input for that variable 
