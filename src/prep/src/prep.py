@@ -3275,8 +3275,11 @@ def scfs(aflowkeys,allAFLOWpiVars, refFile,pseudodir=None,build_type='product',c
 
                             inputfile2 = AFLOWpi.prep._cleanInputStringSCF(inputfile2,convert=convert)                       
 
-
-                            calc_label = AFLOWpi.prep._hash64String(inputfile2)
+                            ## if AFLOWPI PREFIX is passed dont use hash string. 
+                            if not "_AFLOWPI_PREFIX_" in D:
+                                calc_label = AFLOWpi.prep._hash64String(inputfile2)
+                            else:
+                                calc_label = D["_AFLOWPI_PREFIX_"]
 
                             kp = '_AFLOWPI_PREFIX_'
                             calc_label+='_01'
