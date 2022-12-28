@@ -2496,7 +2496,7 @@ def _qe__pre_run(oneCalc,ID,calcType,__submitNodeName__,engine):
     try:
         if calcType!='scf' and calcType!=None and calcType!='custom':
             pp_in = AFLOWpi.run._makeInput(oneCalc,engine,calcType,ID=ID)
-            with open(os.path.join(rd,"%s_%s.in") % (ID,calcType),'w+') as PPInput:
+            with open(os.path.join(rd,"./PP/%s_%s.in") % (ID,calcType),'w+') as PPInput:
                     PPInput.write(pp_in)
 
     except Exception as e:
@@ -2567,7 +2567,11 @@ def _oneRun(__submitNodeName__,oneCalc,ID,execPrefix='',execPostfix='',engine='e
 #################################################################################################################     
 #################################################################################################################      
     try:
-        if calcType!='scf' and calcType!=None and calcType!='custom':
+        if calcType in ['dos','pdos'] : 
+            ri = './PP/'+ID+'_'+calcType+'.in'
+            ro = './PP/'+ID+'_'+calcType+'.out'
+        
+        elif calcType!='scf' and calcType!=None and calcType!='custom':
             ri = ID+'_'+calcType+'.in'
             ro = ID+'_'+calcType+'.out'
         else:

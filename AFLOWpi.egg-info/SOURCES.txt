@@ -77,6 +77,7 @@ src/run/src/fd_fields.py
 src/run/src/fd_phonon_sym.py
 src/run/src/phonon.py
 src/run/src/post_proc.py
+src/run/src/post_proc_copy.py
 src/run/src/raman_spectra.py
 src/run/src/run.py
 src/run/src/sound_velocity.py

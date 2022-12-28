@@ -5011,7 +5011,8 @@ EXITING.
 
                 AFLOWpi.prep.totree(eps_path, self.int_dict,rename=None,symlink=False)
 
-                command="AFLOWpi.run._post_proc(oneCalc,ID,%s,%s)"%(plot_num,",".join(["%s=%s"%(k,v) for k,v in kwargs.items()]))
+                command="AFLOWpi.run._post_proc(oneCalc,ID,%s,%s)"%(plot_num,
+                                                               ",".join(["%s='%s'"%(k,v) for k,v in kwargs.items()]))
                 
                 self.addToAll(block='POSTPROCESSING',addition=command)
 
